@@ -26,7 +26,7 @@
             "id" => $id,
             "name" => $name,
             "address" => html_entity_decode($address),
-            "paymentInfo" => "http://localhost/api/read_one.php?id=".$id,
+            "paymentInfo" => "http://localhost/api/readone.php?id=".$id,
 
         );
 
