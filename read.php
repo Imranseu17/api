@@ -1,23 +1,23 @@
 
-
-
 <?php
+
     //open connection to mysql db
-    $connection = mysqli_connect("localhost","root","","apiService")
-    or die("Error " . mysqli_error($connection));
+require_once __DIR__ . '/Database.php';
+    $database = new Database();
+    $db = $database->getConnection();
 
 
 
     //fetch table rows from mysql db
     $sql = "select * from students";
 
-    $result = mysqli_query($connection, $sql)
-    or die("Error in Selecting " . mysqli_error($connection));
+    $result = $db->prepare($sql);
+    $result->execute();
 
         $student_arr=array();
         $student_arr["data"]=array();
 
-    while($row =mysqli_fetch_assoc($result))
+    while($row = $result->fetch(PDO::FETCH_ASSOC))
     {
 
          extract($row);
@@ -38,6 +38,5 @@
            
 
 
-//close the db connection
-mysqli_close($connection);
+
 ?>

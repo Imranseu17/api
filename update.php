@@ -1,7 +1,8 @@
 <?php
 //open connection to mysql db
-$connection = mysqli_connect("localhost","root","","apiService")
-or die("Error " . mysqli_error($connection));
+require_once __DIR__ . '/Database.php';
+$database = new Database();
+$db = $database->getConnection();
 
 $table_name = "students";
 $table_name2 = "fees_collections";
@@ -16,8 +17,8 @@ $sql = "UPDATE $table_name2 SET paidAmount = $paidAmount WHERE id = $ids";
 
 
 
-$result = mysqli_query($connection, $sql)
-or die("Error in Selecting " . mysqli_error($connection));
+$result = $db->prepare($sql);
+$result->execute();
 
 if($result){
     echo '{';
@@ -32,8 +33,4 @@ else{
     echo '}';
 }
 
-
-
-
-mysqli_close($connection);
 ?>
